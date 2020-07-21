@@ -10,7 +10,7 @@
       <v-list dense>
         <template>
           <!-- Botón de home -->
-          <v-list-item :to="{name: 'home'}">
+          <v-list-item :to="{name: 'Home'}">
             <v-list-item-action>
               <v-icon>home</v-icon>
             </v-list-item-action>
@@ -34,7 +34,7 @@
             </v-list-item>
             <!-- Fin botón principal Almacén -->
             <!-- Categorías -->
-            <v-list-item :to="{name: 'categoria'}">
+            <v-list-item :to="{name: 'Categoria'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
               </v-list-item-action>
@@ -217,7 +217,7 @@
     <v-app-bar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app
-      color="blue darken-2"
+      color="deep-orange"
       dark
     >
       <v-toolbar-title
@@ -248,12 +248,12 @@
     <!-- Fin Contenido -->
 
     <!-- Footer -->
-    <v-footer  dark height="auto">
+    <v-footer  height="auto">
       <v-layout justify-center>
         <v-flex text-xs-center>
-          <v-card flat tile color="primary" class="white--text">
-            <v-card-text class="white--text pt-0">
-              Ingeniería en Sistemas | Ricardo Fuentes &copy;2020
+          <v-card flat tile color="light-blue accent-4" class="text-center">
+            <v-card-text class="white--text font-italic">
+              Ingeniería en Sistemas | Ricardo Fuentes &copy; {{new Date().getFullYear()}}
             </v-card-text>
           </v-card>
         </v-flex>
