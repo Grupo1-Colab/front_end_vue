@@ -3,8 +3,8 @@
     <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg5 xl4>
             <v-card>
-                <v-toolbar color="yellow darken-2">
-                    <v-toolbar-title>
+                <v-toolbar color="blue-grey">
+                    <v-toolbar-title class="white--text">
                         Ingresa al Sistema
                     </v-toolbar-title>
                 </v-toolbar>
