@@ -3,25 +3,23 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
-          :src="require('../assets/Frontienda.png')"
+          :src="require('../assets/FT.png')"
           class="my-3"
           contain
-          height="200"
+          height="350"
         />
       </v-col>
 
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
+          ¡Bienvenido a FronTienda!
         </h1>
 
         <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
+          Una tienda para tí, para todos, 
+          <a class="d-inline pa-2 pink darken-1 white--text">
+            SIN FRONTERAS.
+          </a> 
         </p>
       </v-col>
 
@@ -30,20 +28,14 @@
         cols="12"
       >
         <h2 class="headline font-weight-bold mb-3">
-          What's next?
+          ¿Quiénes somos?
         </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
+        <p>
+          FronTienda es una tienda especializada en la comercialización de los productos
+          más importantes y necesarios para los negocios y sus clientes.
+          <br>
+          Con nosotros puedes comprar todo lo que necesites en un sólo instante.
+        </p>
       </v-col>
 
       <v-col
@@ -51,7 +43,7 @@
         cols="12"
       >
         <h2 class="headline font-weight-bold mb-3">
-          Important Links
+          Enlaces Importantes
         </h2>
 
         <v-row justify="center">
@@ -62,7 +54,9 @@
             class="subheading mx-3"
             target="_blank"
           >
-            {{ link.text }}
+            <v-btn color="primary">
+              {{ link.text }}
+            </v-btn>
           </a>
         </v-row>
       </v-col>
@@ -72,8 +66,21 @@
         cols="12"
       >
         <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
+          Ecosistema
         </h2>
+
+        <p>
+          Este proyecto está desarrollado gracias a la implementación de VueJS 
+          <v-img
+            :src="require('../assets/logo.png')"
+            class="my-1"
+            contain
+            height="40"
+          ></v-img>
+          <br>
+          un framework escrito en JavaScript perfecto para el desarrollo de aplicaciones
+          single page.
+        </p>
 
         <v-row justify="center">
           <a
@@ -83,7 +90,9 @@
             class="subheading mx-3"
             target="_blank"
           >
-            {{ eco.text }}
+            <v-btn color="success">
+              {{ eco.text }}
+            </v-btn>
           </a>
         </v-row>
       </v-col>
@@ -112,38 +121,20 @@
       ],
       importantLinks: [
         {
-          text: 'Documentation',
+          text: 'Vuetify',
           href: 'https://vuetifyjs.com',
         },
         {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com',
+          text: 'Facebook',
+          href: 'https://www.facebook.com/ricardo.fuentes.73307',
         },
         {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuejs.com/vuetify',
+          text: 'LinkedIn',
+          href: 'https://www.linkedin.com/in/ricardo-fuentes-9b0a99168',
         },
         {
           text: 'Twitter',
           href: 'https://twitter.com/vuetifyjs',
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify',
-        },
-      ],
-      whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer',
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
         },
       ],
     }),
