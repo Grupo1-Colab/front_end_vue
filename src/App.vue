@@ -244,7 +244,7 @@
         fill-height
       >
         <v-slide-y-transition mode="out-in">
-          <router-view/>
+          <router-view/> <!--Contenido traido desde el router-->
         </v-slide-y-transition>
       </v-container>
     </v-main>
