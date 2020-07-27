@@ -10,7 +10,7 @@
       <v-list dense>
         <template>
           <!-- Botón de home -->
-          <v-list-item :to="{name: 'Home'}">
+          <v-list-item :to="{name: 'HelloWorld'}">
             <v-list-item-action>
               <v-icon>home</v-icon>
             </v-list-item-action>
