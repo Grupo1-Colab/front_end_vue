@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 //Importar los Componentes
-import Home from '../views/Home.vue';
+//import Home from '../views/Home.vue';
 import Categorias from '../components/Categoria.vue';
 import Login from '../components/Login.vue';
+import HelloWorld from '../components/HelloWorld.vue';
 
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'HelloWorld',
+    component: HelloWorld
   },
   {
     path: '/categoria',
