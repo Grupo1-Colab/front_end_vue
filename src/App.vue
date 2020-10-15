@@ -6,9 +6,10 @@
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
+      v-if="logueado"
     >
       <v-list dense>
-        <template>
+        <template v-if="logueado">
           <!-- Botón de home -->
           <v-list-item :to="{name: 'HelloWorld'}">
             <v-list-item-action>
@@ -21,7 +22,7 @@
           <!-- Fin botón de home -->
         </template>
 
-        <template>
+        <template v-if="logueado">
         <!-- Listado agrupado de Almacén -->
           <v-list-group>
             <!-- Botón Principal Almacén -->
@@ -61,7 +62,7 @@
           </v-list-group>
         </template>
 
-        <template>
+        <template v-if="logueado">
         <!-- Listado agrupado de Compras -->
           <v-list-group>
             <!-- Botón principal Compras -->
@@ -101,7 +102,7 @@
         <!-- Fin de listado agrupado de Compras -->
         </template>
 
-        <template>
+        <template v-if="logueado">
         <!-- Listado agrupado de Ventas -->
           <v-list-group>
             <!-- Botón Principal de Ventas -->
@@ -141,7 +142,7 @@
         <!-- Fin listado agrupado de Ventas -->
         </template>
 
-        <template>
+        <template v-if="logueado">
         <!-- Listado agrupado de Accesos -->
           <v-list-group>
             <!-- Botón principal de Accesos -->
@@ -169,7 +170,7 @@
         <!-- Fin listado agrupado de Accesos -->
         </template>
 
-        <template>
+        <template v-if="logueado">
         <!-- Listado agrupado de Consultas -->
           <v-list-group>
             <!-- Botón principal de Consultas -->
@@ -280,7 +281,21 @@ export default {
 
   data: () => ({
     //
-    drawer: null
+    drawer: true,
   }),
+
+  computed: {
+    logueado(){
+      return this.$store.state.token
+    }
+  },
+
+  created(){
+    this.$store.dispatch('autoLogin');
+  },
+
+  methods: {
+    
+  },
 };
 </script>
