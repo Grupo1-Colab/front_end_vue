@@ -5,6 +5,8 @@ import store from '../store/index'
 import Categorias from '../components/Categoria.vue';
 import Login from '../components/Login.vue';
 import HelloWorld from '../components/HelloWorld.vue';
+import Usuarios from '../components/Usuarios.vue';
+import Articulos from '../components/Articulos.vue';
 
 Vue.use(VueRouter)
 
@@ -32,7 +34,23 @@ Vue.use(VueRouter)
     meta: {
       libre: true
     }
-  }
+  },
+  {
+    path: '/usuarios',
+    name: 'Usuarios',
+    component: Usuarios,
+    meta: {
+      admin: true
+    }
+  },
+  {
+    path: '/articulos',
+    name: 'Articulos',
+    component: Articulos,
+    meta: {
+      admin: true
+    }
+  },
 ]
 
 const router = new VueRouter({
