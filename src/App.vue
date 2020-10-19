@@ -47,7 +47,7 @@
             </v-list-item>
             <!-- Fin categorías -->
             <!-- Artículos -->
-            <v-list-item :to="{name: ''}">
+            <v-list-item :to="{name: 'Articulos'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
               </v-list-item-action>
@@ -155,7 +155,7 @@
             </v-list-item>
             <!-- Fin botón principal de accesos -->
             <!-- Usuarios -->
-            <v-list-item :to="{name: ''}">
+            <v-list-item :to="{name: 'Usuarios'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
               </v-list-item-action>
@@ -182,18 +182,6 @@
               </v-list-item-content>
             </v-list-item>
             <!-- Fin botón principal de Consultas -->
-            <!-- Consulta Compras -->
-            <v-list-item :to="{name: ''}">
-              <v-list-item-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Consulta Compras
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <!-- Fin Consulta Compras -->
             <!-- Consulta Ventas -->
             <v-list-item :to="{name: ''}">
               <v-list-item-action>
@@ -229,11 +217,11 @@
         <span class="hidden-sm-and-down">Sistema FronTienda</span>
       </v-toolbar-title>      
       <v-spacer></v-spacer>
-      <v-btn icon :to="{name: 'Login'}">
-        <v-icon>login</v-icon>
+      <v-btn @click="salir()" icon v-if="logueado">
+        <v-icon>logout</v-icon>Salir
       </v-btn>
-      <v-btn icon>
-        <v-icon>logout</v-icon>
+      <v-btn icon v-else :to="{name: 'Login'}">
+        <v-icon>login</v-icon>
       </v-btn>
     </v-app-bar>
     <!-- Fin barra superior -->
@@ -295,7 +283,9 @@ export default {
   },
 
   methods: {
-    
+    salir(){
+      this.$store.dispatch('salir');
+    },
   },
 };
 </script>
