@@ -112,7 +112,6 @@ export default {
             { text: 'No.', value: 'id', sortable: true },
             { text: 'Nombre', value: 'nombre', sortable: true },
             { text: 'Descripción', value: 'descripcion', sortable: false },
-            { text: 'Estado', value: 'estado', sortable: false },
             { text: 'Opciones', value: 'actions', sortable: false },
         ],
         editedIndex: -1,
@@ -146,7 +145,9 @@ export default {
     methods: {
         listar() {
             let cat = this;
-            axios.get('categorias/')
+            axios.get('categorias/',{headers: {
+                'Authorization': `Token ${this.$store.state.token}`
+            }})
             .then((response)=>{
                 cat.categorias = response.data;
             })
@@ -182,9 +183,11 @@ export default {
 
         activar(){
             let cat = this;
+            let header = {'Authorization': `Token ${this.$store.state.token}`};
+            let configuracion = {headers : header};
             axios.patch(`categorias/${this.adId}/`, {
                 'estado': 1,
-            })
+            }, configuracion)
             .then((response) => {
                 console.log(response);
                 cat.adModal = 0;
@@ -200,9 +203,11 @@ export default {
         
         desactivar(){
             let cat = this;
+            let header = {'Authorization': `Token ${this.$store.state.token}`};
+            let configuracion = {headers : header};
             axios.patch(`categorias/${this.adId}/`, {
                 'estado': 0,
-            })
+            }, configuracion)
             .then((response) => {
                 console.log(response);
                 cat.adModal = 0;
@@ -245,6 +250,8 @@ export default {
 
         guardar () {
             let cat = this;
+            let header = {'Authorization': `Token ${this.$store.state.token}`};
+            let configuracion = {headers : header};
 
             if (this.validar()) {
                 return;
@@ -255,7 +262,7 @@ export default {
                 axios.put(`categorias/${this.id}/`, {
                     'nombre': this.nombre,
                     'descripcion': this.descripcion,
-                })
+                }, configuracion)
                 .then((response) => {
                     console.log(response);
                     cat.limpiar();
@@ -267,10 +274,18 @@ export default {
                 });
             } else {
                 //Código para guardar un nuevo registro
-                cat.limpiar();
-                axios.post('categorias/', {
-                    'nombre': this.nombre,
-                    'descripcion': this.descripcion
+                //cat.limpiar();
+                axios({
+                    method: 'post',
+                    url: 'categorias/',
+                    data: {
+                        'nombre': this.nombre,
+                        'descripcion': this.descripcion
+                    },
+                    headers: {
+                        'Authorization': `Token ${this.$store.state.token}`,
+                        'Content-Type': 'application/json'
+                    }
                 })
                 .then((response) => {
                     console.log(response);
