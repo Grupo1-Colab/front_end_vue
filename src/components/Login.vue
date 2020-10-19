@@ -28,6 +28,9 @@
                             required
                         ></v-text-field>
                         <!-- Fin Campo Password -->
+                        <v-flex class="red--text" v-if="errorM">
+                            {{errorM}}
+                        </v-flex>
                     </v-card-text>
                     <v-card-actions class="px-3 pb-3">
                         <v-flex text-xs-right>
@@ -47,7 +50,8 @@ export default {
     data() {
         return {
             username: '',
-            password: ''
+            password: '',
+            errorM: null
         }
     },
     methods: {
@@ -64,7 +68,13 @@ export default {
                 this.$router.push({name: 'HelloWorld'});
             })
             .catch((error) => {
-                console.log(error);
+                //console.log(error);
+                this.errorM = null;
+                if(error.response.status == 404){
+                    this.errorM = 'No existe el usuario o las credenciales son incorrectas';
+                } else {
+                    this.errorM = 'Ocurrió un error con el servidor';
+                }
             })
         }
     }
