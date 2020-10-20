@@ -8,6 +8,7 @@ import HelloWorld from '../components/HelloWorld.vue';
 import Usuarios from '../components/Usuarios.vue';
 import Articulos from '../components/Articulos.vue';
 import Clientes from '../components/Clientes.vue';
+import Fabricas from '../components/Fabricas.vue';
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,14 @@ Vue.use(VueRouter)
     path: '/clientes',
     name: 'Clientes',
     component: Clientes,
+    meta: {
+      admin: true
+    }
+  },
+  {
+    path: '/fabricas',
+    name: 'Fabricas',
+    component: Fabricas,
     meta: {
       admin: true
     }
