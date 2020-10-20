@@ -127,7 +127,7 @@
             </v-list-item>
             <!-- Fin Ventas -->
             <!-- Clientes -->
-            <v-list-item :to="{name: ''}">
+            <v-list-item :to="{name: 'Clientes'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
               </v-list-item-action>
