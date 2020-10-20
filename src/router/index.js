@@ -7,6 +7,7 @@ import Login from '../components/Login.vue';
 import HelloWorld from '../components/HelloWorld.vue';
 import Usuarios from '../components/Usuarios.vue';
 import Articulos from '../components/Articulos.vue';
+import Clientes from '../components/Clientes.vue';
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,14 @@ Vue.use(VueRouter)
     path: '/usuarios',
     name: 'Usuarios',
     component: Usuarios,
+    meta: {
+      admin: true
+    }
+  },
+  {
+    path: '/clientes',
+    name: 'Clientes',
+    component: Clientes,
     meta: {
       admin: true
     }
