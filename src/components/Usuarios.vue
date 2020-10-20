@@ -41,7 +41,7 @@
                                             <v-text-field v-model="email" label="Correo electrónico"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="password" label="Contraseña"></v-text-field>
+                                            <v-text-field v-model="password" type="password" label="Contraseña"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="12" md="12">
                                             <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">
