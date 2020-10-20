@@ -196,7 +196,7 @@ export default {
             this.valida = 0;
             this.validaMensaje = [];
             if (this.nombre.length < 1 || this.nombre.length > 50) {
-                this.validaMensaje.push('El nombre del usuario debe tener entre 1 a 50 caracteres.');
+                this.validaMensaje.push('El nombre de cliente debe tener entre 1 a 50 caracteres.');
             }
             if (this.saldo > this.credito_limite) {
                 this.validaMensaje.push('El saldo no puede ser superior al crédito');
