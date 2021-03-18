@@ -158,7 +158,7 @@ export default {
     methods: {
         listar() {
             let cat = this;
-            axios.get('usuarios/listar/',{headers: {
+            axios.get('usuarios/listar',{headers: {
                 'Authorization': `Token ${this.$store.state.token}`
             }})
             .then((response)=>{
@@ -316,7 +316,7 @@ export default {
                 //Código para guardar un nuevo registro
                 axios({
                     method: 'post',
-                    url: 'usuarios/crear/',
+                    url: 'usuarios/crear',
                     data: {
                         'first_name': this.nombre,
                         'last_name': this.apellido,
