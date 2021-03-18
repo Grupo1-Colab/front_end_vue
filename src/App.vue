@@ -63,34 +63,6 @@
         </template>
 
         <template v-if="logueado">
-        <!-- Listado agrupado de Compras -->
-          <v-list-group>
-            <!-- Botón principal Compras -->
-            <v-list-item slot="activator">
-              <v-list-item-content>
-                <v-list-item-title>
-                  Compras
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <!-- Fin botón principal Compras -->
-            <!-- Proveedores -->
-            <v-list-item :to="{name: 'Fabricas'}">
-              <v-list-item-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Fábricas Proveedoras
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <!-- Fin Proveedores -->
-          </v-list-group>
-        <!-- Fin de listado agrupado de Compras -->
-        </template>
-
-        <template v-if="logueado">
         <!-- Listado agrupado de Ventas -->
           <v-list-group>
             <!-- Botón Principal de Ventas -->
@@ -202,7 +174,7 @@
         class="ml-0 pl-3"
       >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <span class="hidden-sm-and-down">Sistema FronTienda</span>
+        <span class="hidden-sm-and-down">Sistema CoffeeManager</span>
       </v-toolbar-title>      
       <v-spacer></v-spacer>
       <v-btn @click="salir()" icon v-if="logueado">
@@ -233,7 +205,7 @@
         <v-flex text-xs-center>
           <v-card flat tile color="light-blue accent-4" class="text-center">
             <v-card-text class="white--text font-italic">
-              Ingeniería en Sistemas | Ricardo Fuentes &copy; {{new Date().getFullYear()}}
+              Grupo 12.1 | Colab &copy; {{new Date().getFullYear()}}
             </v-card-text>
           </v-card>
         </v-flex>
