@@ -29,7 +29,7 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="nombre" label="Nombre de la Categoría"></v-text-field>
+                                            <v-text-field v-model="tipo" label="Tipo de la Categoría"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="descripcion" label="Descripción"></v-text-field>
@@ -64,7 +64,7 @@
                             <v-card-text>
                                 Estás a punto de 
                                 <span v-if="adAccion == 1"> ACTIVAR</span>
-                                <span v-if="adAccion == 0"> DESACTIVAR</span> la categoría {{adNombre}}
+                                <span v-if="adAccion == 0"> DESACTIVAR</span> la categoría {{adtipo}}
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -110,20 +110,20 @@ export default {
         categorias: [],
         headers: [
             { text: 'No.', value: 'id', sortable: true },
-            { text: 'Nombre', value: 'nombre', sortable: true },
+            { text: 'Tipo', value: 'tipo', sortable: false },
             { text: 'Descripción', value: 'descripcion', sortable: false },
             { text: 'Opciones', value: 'actions', sortable: false },
         ],
         editedIndex: -1,
         id: '',
-        nombre: '',
+        tipo: '',
         descripcion: '',
         estado: '',
         valida: 0,
         validaMensaje: [],
         adModal: 0,
         adAccion: 0,
-        adNombre: '',
+        adtipo: '',
         adId: ''
     }),
     computed: {
@@ -145,7 +145,7 @@ export default {
     methods: {
         listar() {
             let cat = this;
-            axios.get('categorias/',{headers: {
+            axios.get('categoria/listar',{headers: {
                 'Authorization': `Token ${this.$store.state.token}`
             }})
             .then((response)=>{
@@ -158,7 +158,7 @@ export default {
 
         editItem (item) {
             this.id = item.id;
-            this.nombre = item.nombre;
+            this.tipo = item.tipo;
             this.descripcion = item.descripcion;
             this.dialog = true;
             this.editedIndex = 1;
@@ -166,7 +166,7 @@ export default {
 
         activarDesactivarMostrar(accion, item){
             this.adModal = 1;
-            this.adNombre = item.nombre;
+            this.adtipo = item.tipo;
             this.adId = item.id;
             if (accion == 1) {
                 this.adAccion = 1;
@@ -185,14 +185,14 @@ export default {
             let cat = this;
             let header = {'Authorization': `Token ${this.$store.state.token}`};
             let configuracion = {headers : header};
-            axios.patch(`categorias/${this.adId}/`, {
+            axios.patch(`categoria/actualizar/${this.adId}`, {
                 'estado': 1,
             }, configuracion)
             .then((response) => {
                 console.log(response);
                 cat.adModal = 0;
                 cat.adAccion = 0;
-                cat.adNombre = '';
+                cat.adtipo = '';
                 cat.adId = ''
                 cat.listar();
             })
@@ -205,14 +205,14 @@ export default {
             let cat = this;
             let header = {'Authorization': `Token ${this.$store.state.token}`};
             let configuracion = {headers : header};
-            axios.patch(`categorias/${this.adId}/`, {
+            axios.patch(`categoria/actualizar/${this.adId}`, {
                 'estado': 0,
             }, configuracion)
             .then((response) => {
                 console.log(response);
                 cat.adModal = 0;
                 cat.adAccion = 0;
-                cat.adNombre = '';
+                cat.adtipo = '';
                 cat.adId = ''
                 cat.listar();
             })
@@ -226,7 +226,7 @@ export default {
         },
 
         limpiar(){
-            this.nombre = '';
+            this.tipo = '';
             this.descripcion = '';
             this.valida = 0;
             this.validaMensaje = [];
@@ -236,8 +236,8 @@ export default {
         validar(){
             this.valida = 0;
             this.validaMensaje = [];
-            if (this.nombre.length < 1 || this.nombre.length > 50) {
-                this.validaMensaje.push('El nombre de la categoría debe tener entre 1 a 50 caracteres.');
+            if (this.tipo.value > 6 && this.tipo.value < 0) {
+                this.validaMensaje.push('El tipo de la categoría debe tener ser de 0 a 6');
             }
             if (this.descripcion.length > 255) {
                 this.validaMensaje.push('La descripción de la categoría no debe tener más de 255 caracteres.');
@@ -259,8 +259,8 @@ export default {
 
             if (this.editedIndex > -1) {
                 //Código para editar datos del registro
-                axios.put(`categorias/${this.id}/`, {
-                    'nombre': this.nombre,
+                axios.put(`categoria/actualizar/${this.id}`, {
+                    'tipo': this.tipo,
                     'descripcion': this.descripcion,
                 }, configuracion)
                 .then((response) => {
@@ -277,9 +277,9 @@ export default {
                 //cat.limpiar();
                 axios({
                     method: 'post',
-                    url: 'categorias/',
+                    url: 'categoria/crear',
                     data: {
-                        'nombre': this.nombre,
+                        'tipo': this.tipo,
                         'descripcion': this.descripcion
                     },
                     headers: {
