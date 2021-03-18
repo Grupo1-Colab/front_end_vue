@@ -29,16 +29,16 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="nombre" label="Nombre y Apellido del Cliente"></v-text-field>
+                                            <v-text-field v-model="first_name" label="first_name y Apellido del Cliente"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="saldo" label="Saldo actual (Q)"></v-text-field>
+                                            <v-text-field v-model="last_name" label="last_name actual (Q)"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="credito_limite" label="Crédito límite del cliente (Q)"></v-text-field>
+                                            <v-text-field v-model="username" label="Crédito límite del cliente (Q)"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="no_calle" label="Número de Calle"></v-text-field>
+                                            <v-text-field v-model="email" label="Número de Calle"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="comuna" label="Comuna"></v-text-field>
@@ -76,7 +76,7 @@
                             <v-card-text>
                                 Estás a punto de 
                                 <span v-if="adAccion == 1"> ACTIVAR</span>
-                                <span v-if="adAccion == 0"> DESACTIVAR</span> al usuario: {{adNombre}}
+                                <span v-if="adAccion == 0"> DESACTIVAR</span> al usuario: {{adfirst_name}}
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -122,26 +122,23 @@ export default {
         clientes: [],
         headers: [
             { text: 'No.', value: 'id', sortable: true },
-            { text: 'Nombre', value: 'nombre', sortable: true },
-            { text: 'Saldo', value: 'saldo', sortable: false },
-            { text: 'Crédito límite', value: 'credito_limite', sortable: false },
-            { text: 'Número de Calle', value: 'no_calle', sortable: false },
-            { text: 'Comuna', value: 'comuna', sortable: false },
-            { text: 'Ciudad', value: 'ciudad', sortable: true },
+            { text: 'Nombre', value: 'first_name', sortable: true },
+            { text: 'Apellido', value: 'last_name', sortable: false },
+            { text: 'Username', value: 'username', sortable: false },
+            { text: 'Email', value: 'email', sortable: false },
         ],
         editedIndex: -1,
         id: '',
-        nombre: '',
-        saldo: '',
-        credito_limite: '',
-        no_calle: '',
-        comuna: '',
-        ciudad: '',
+        first_name: '',
+        last_name: '',
+        username: '',
+        email: '',
+        
         valida: 0,
         validaMensaje: [],
         adModal: 0,
         adAccion: 0,
-        adNombre: '',
+        adfirst_name: '',
         adId: ''
     }),
     computed: {
@@ -163,7 +160,7 @@ export default {
     methods: {
         listar() {
             let cat = this;
-            axios.get('clientes/',{headers: {
+            axios.get('clientes/listar',{headers: {
                 'Authorization': `Token ${this.$store.state.token}`
             }})
             .then((response)=>{
@@ -180,33 +177,34 @@ export default {
 
         limpiar(){
             this.id = '';
-            this.nombre = '',
-            this.saldo = '',
-            this.credito_limite = '',
-            this.no_calle = '',
-            this.comuna = '',
-            this.ciudad = '',
+            this.first_name = '',
+            this.last_name = '',
+            this.username = '',
+            this.email = '',
+
             this.valida = 0;
             this.validaMensaje = [];
             this.editedIndex = -1;
         },
 
         validar(){
-            let num = 0;
             this.valida = 0;
             this.validaMensaje = [];
-            if (this.nombre.length < 1 || this.nombre.length > 50) {
-                this.validaMensaje.push('El nombre de cliente debe tener entre 1 a 50 caracteres.');
+            if (this.first_name.length < 1 || this.first_name.length > 50) {
+                this.validaMensaje.push('El Nombre de cliente debe tener entre 1 a 50 caracteres.');
             }
-            if (this.saldo > this.credito_limite) {
-                this.validaMensaje.push('El saldo no puede ser superior al crédito');
+            if (this.last_name.length < 1 || this.last_name.length > 50) {
+                this.validaMensaje.push('El Apellido de cliente debe tener entre 1 a 50 caracteres.');
             }
-            if (this.credito_limite > 30000) {
-                this.validaMensaje.push('Se ha sobrepasado la capacidad de crédito del cliente.');
+            if (this.username.length < 1 || this.username.length > 50) {
+                this.validaMensaje.push('El username de cliente debe tener entre 1 a 50 caracteres.');
             }
-            num = parseInt(this.no_calle)
-            if (isNaN(num)) {
-                this.validaMensaje.push('La calle debe estar escrita con un número.');
+            if(this.email){
+                let correoValido = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(this.email.value)
+                if(!correoValido){
+                    this.validaMensaje.push('Debe ingresar un email válido.');
+                }
+                return console.log(correoValido);
             }
             if (this.validaMensaje.length) {
                 this.valida = 1;
@@ -225,7 +223,7 @@ export default {
 
             if (this.editedIndex > -1) {
                 //Código para editar datos del registro
-                axios.patch(`clientes/${this.id}`, {
+                axios.patch(`clientes/actualizar/${this.id}`, {
                     //
                 }, configuracion)
                 .then((response) => {
@@ -241,13 +239,13 @@ export default {
                 //Código para guardar un nuevo registro
                 axios({
                     method: 'post',
-                    url: 'clientes/',
+                    url: 'clientes/crear',
                     data: {
-                        'nombre': this.nombre,
-                        'saldo': this.saldo,
-                        'credito_limite': this.credito_limite,
+                        'first_name': this.first_name,
+                        'last_name': this.last_name,
+                        'username': this.username,
                         'direcciones': this.direcciones,
-                        'no_calle': this.no_calle,
+                        'email': this.email,
                         'comuna': this.comuna,
                         'ciudad': this.ciudad
                     },
