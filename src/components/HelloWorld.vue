@@ -12,11 +12,11 @@
 
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          ¡Bienvenido a FronTienda!
+          ¡Bienvenido a CoffeeManager!
         </h1>
 
         <p class="subheading font-weight-regular">
-          Una tienda para tí, para todos, 
+          Un café para tí, para todos, 
           <a class="d-inline pa-2 pink darken-1 white--text">
             SIN FRONTERAS.
           </a> 
@@ -31,34 +31,11 @@
           ¿Quiénes somos?
         </h2>
         <p>
-          FronTienda es una tienda especializada en la comercialización de los productos
-          más importantes y necesarios para los negocios y sus clientes.
+          CoffeeManager es un sistema especializado en la administración de los productos
+          más importantes y necesarios para los negocios, como cafeterías, y sus clientes.
           <br>
-          Con nosotros puedes comprar todo lo que necesites en un sólo instante.
+          Con nosotros puedes administrar todo lo que necesites en un sólo instante.
         </p>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Enlaces Importantes
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            <v-btn color="primary">
-              {{ link.text }}
-            </v-btn>
-          </a>
-        </v-row>
       </v-col>
 
       <v-col
