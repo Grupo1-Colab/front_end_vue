@@ -18,7 +18,7 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="dialog" max-width="500px">
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Nuevo Artículo</v-btn>
+                            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">Nuevo Producto</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -29,7 +29,7 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="nombre" label="Nombre del Artículo"></v-text-field>
+                                            <v-text-field v-model="nombre" label="Nombre del producto"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="descripcion" label="Descripción"></v-text-field>
@@ -38,7 +38,7 @@
                                             <v-text-field v-model="precio" label="Precio de venta (En Quetzales)"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="existencias" label="Cantidad de existencias"></v-text-field>
+                                            <v-text-field v-model="categoria" label="Categoría"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="12" md="12">
                                             <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">
@@ -119,8 +119,8 @@ export default {
             { text: 'Nombre', value: 'nombre', sortable: true },
             { text: 'Descripción', value: 'descripcion', sortable: false },
             { text: 'Precio', value: 'precio', sortable: false },
-            { text: 'Existencias', value: 'existencias', sortable: false },
             { text: 'Fecha de creación', value: 'createdAt', sortable: false },
+            { text: 'Categoría', value: 'categoria', sortable: false },
             { text: 'Opciones', value: 'actions', sortable: false },
         ],
         editedIndex: -1,
@@ -129,7 +129,8 @@ export default {
         descripcion: '',
         precio: '',
         estado: '',
-        existencias: '',
+        categoria: '',
+
         valida: 0,
         validaMensaje: [],
         adModal: 0,
@@ -156,7 +157,7 @@ export default {
     methods: {
         listar() {
             let cat = this;
-            axios.get('articulos/',{headers: {
+            axios.get('producto/listar',{headers: {
                 'Authorization': `Token ${this.$store.state.token}`
             }})
             .then((response)=>{
@@ -171,6 +172,7 @@ export default {
             this.id = item.id;
             this.nombre = item.nombre;
             this.descripcion = item.descripcion;
+            this.categoria = item.categoria;
             this.dialog = true;
             this.editedIndex = 1;
         },
@@ -196,7 +198,7 @@ export default {
             let cat = this;
             let header = {'Authorization': `Token ${this.$store.state.token}`};
             let configuracion = {headers : header};
-            axios.patch(`articulos/${this.adId}/`, {
+            axios.patch(`producto/actualizar/${this.adId}`, {
                 'estado': 1,
             }, configuracion)
             .then((response) => {
@@ -216,7 +218,7 @@ export default {
             let cat = this;
             let header = {'Authorization': `Token ${this.$store.state.token}`};
             let configuracion = {headers : header};
-            axios.patch(`articulos/${this.adId}/`, {
+            axios.patch(`producto/actualizar/${this.adId}`, {
                 'estado': 0,
             }, configuracion)
             .then((response) => {
@@ -270,11 +272,11 @@ export default {
 
             if (this.editedIndex > -1) {
                 //Código para editar datos del registro
-                axios.patch(`articulos/${this.id}/`, {
+                axios.patch(`producto/actualizar/${this.id}`, {
                     'nombre': this.nombre,
                     'descripcion': this.descripcion,
                     'precio': this.precio,
-                    'existencias': this.existencias,
+                    'categoria': this.categoria,
                 }, configuracion)
                 .then((response) => {
                     console.log(response);
@@ -290,12 +292,12 @@ export default {
                 //cat.limpiar();
                 axios({
                     method: 'post',
-                    url: 'articulos/',
+                    url: 'producto/crear',
                     data: {
                         'nombre': this.nombre,
                         'descripcion': this.descripcion,
                         'precio': this.precio,
-                        'existencias': this.existencias,
+                        'categoria': this.categoria,
                     },
                     headers: {
                         'Authorization': `Token ${this.$store.state.token}`,
