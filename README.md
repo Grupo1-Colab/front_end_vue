@@ -1,4 +1,4 @@
-# frontienda
+# Coffee Manager
 
 ## Project setup
 ```
